@@ -13,9 +13,9 @@ public:
 	T *operator ->(){
 		return value.get();
 	}
-	void lock(std::function<void()> block){
+	void lock(std::function<void(T&)> block){
 		std::unique_lock<std::recursive_mutex> guard(*mutex.get());
-			block();
+			block(*value.get());
 	}
 
 	lockable(lockable<T,ARGS...> &&o){
