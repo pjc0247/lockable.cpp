@@ -20,8 +20,8 @@ void main(){
     threads.push_back(
       std::thread([&a](){
         for(int i=0;i<10000;i++){
-          a.lock([&a](){
-            a->value ++;
+          a.lock([](test &v){
+            v.value ++;
           }); 
         }
       }));
